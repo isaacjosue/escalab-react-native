@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
   infoContainer: {
     alignItems: 'center',
     backgroundColor: 'white',
+    borderTopColor: "black",
+    borderTopWidth: 2,
     flexDirection: 'row',
     minHeight: 120,
     padding: 6,
