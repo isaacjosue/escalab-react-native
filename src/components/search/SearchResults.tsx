@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 const SearchResults = ({ movies }: Props): React.JSX.Element => {
   return (
     <View style={styles.results}>
-      <ScrollView>
+      <ScrollView persistentScrollbar>
         {movies.length > 0 ? (
           <BigList movies={movies} />
         ) : (

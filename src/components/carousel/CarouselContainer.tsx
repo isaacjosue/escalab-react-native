@@ -3,27 +3,36 @@ import React, { useState, useEffect } from 'react';
 import Carousel from './Carousel';
 import { MovieType } from '../../types';
 
-import { getUpcomingMovies } from '../../utils/api';
 import { removeDuplicatesById } from '../../utils/removeDuplicates';
 
-const UpcomingMovies = (): React.JSX.Element => {
+type Props = {
+  title: string;
+  getMoviesMethod: ({ ...args }) => Promise<{
+    results: MovieType[];
+    page: number;
+  }>;
+};
+
+const CarouselContainer = ({
+  title,
+  getMoviesMethod,
+}: Props): React.JSX.Element => {
   const [page, setPage] = useState<number>(0);
   const [movies, setMovies] = useState<MovieType[]>([]);
 
   const getMovies = async () => {
-    const data: { results: MovieType[] } = await getUpcomingMovies({
+    const data = await getMoviesMethod({
       page: page + 1,
     });
-
     setMovies(removeDuplicatesById([...movies, ...data.results]));
-    setPage(page + 1);
+    setPage(data.page);
   };
 
   useEffect(() => {
     getMovies();
   }, []);
 
-  return <Carousel title="Upcoming" movies={movies} fetchMore={getMovies} />;
+  return <Carousel title={title} movies={movies} fetchMore={getMovies} />;
 };
 
-export default UpcomingMovies;
+export default CarouselContainer;

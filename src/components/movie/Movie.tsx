@@ -13,16 +13,18 @@ type Props = {
 const styles = StyleSheet.create({
   movie: {
     margin: 5,
-    width: 92,
+    width: 120,
   },
   poster: {
-    height: 138,
+    aspectRatio: 2 / 3,
     width: '100%',
   },
   infoContainer: {
+    alignItems: 'center',
     backgroundColor: 'white',
     flexDirection: 'row',
-    padding: 3,
+    minHeight: 120,
+    padding: 6,
   },
   info: {
     color: 'black',
@@ -35,9 +37,10 @@ const styles = StyleSheet.create({
 const Movie = ({ movie }: Props): React.JSX.Element => {
   const navigation = useNavigation<Navigation>();
   const [imageUri, setImageUri] = useState<string>(
-    `https://image.tmdb.org/t/p/w92/${movie.poster_path}`,
+    `https://image.tmdb.org/t/p/w154/${movie.poster_path}`,
   );
 
+  // const title = movie.title
   const title =
     movie.title.length <= 30
       ? movie.title

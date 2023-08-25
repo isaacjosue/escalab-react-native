@@ -13,7 +13,7 @@ type Props = {
 
 const styles = StyleSheet.create({
   bigList: {
-    backgroundColor: 'black',
+    backgroundColor: '#1c1c1c',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',

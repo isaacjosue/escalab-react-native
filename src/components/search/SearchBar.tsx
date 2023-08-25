@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 type Props = {

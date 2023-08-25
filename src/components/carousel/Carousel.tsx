@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { MovieType } from '../../types';
 import { Movie } from '../movie';
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     backgroundColor: '#1c1c1c',
     flexDirection: 'row',
+    height: 330,
     justifyContent: 'space-evenly',
     overflow: 'scroll',
     padding: 5,
@@ -35,15 +37,20 @@ const Carousel = ({ movies, title, fetchMore }: Props): React.JSX.Element => {
   return (
     <View style={styles.carousel}>
       <Text style={styles.title}>{title}</Text>
-      <FlatList
-        horizontal
-        contentContainerStyle={styles.list}
-        data={movies}
-        renderItem={({ item }) => <Movie movie={item} />}
-        onEndReached={() => {
-          fetchMore();
-        }}
-      />
+      {movies ? (
+        <FlatList
+          horizontal
+          contentContainerStyle={styles.list}
+          data={movies}
+          renderItem={({ item }) => <Movie movie={item} />}
+          onEndReachedThreshold={0.8}
+          onEndReached={() => {
+            fetchMore();
+          }}
+        />
+      ) : (
+        <Icon name="loading" color="black" />
+      )}
     </View>
   );
 };

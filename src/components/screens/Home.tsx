@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 
-import {
-  PopularMovies,
-  TopRatedMovies,
-  CurrentlyPlayingMovies,
-  UpcomingMovies,
-} from '../carousels';
 import Screen from './Screen';
+import { CarouselContainer } from '../carousel';
+
+import {
+  getCurrentlyPlayingMovies,
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+} from '../../utils/api';
 
 const styles = StyleSheet.create({
   home: {
@@ -21,10 +23,22 @@ const Home = (): React.JSX.Element => {
     <Screen>
       <View style={styles.home}>
         <ScrollView persistentScrollbar>
-          <PopularMovies />
-          <TopRatedMovies />
-          <CurrentlyPlayingMovies />
-          <UpcomingMovies />
+          <CarouselContainer
+            title="Popular Movies"
+            getMoviesMethod={getPopularMovies}
+          />
+          <CarouselContainer
+            title="Top Rated"
+            getMoviesMethod={getTopRatedMovies}
+          />
+          <CarouselContainer
+            title="Now Playing"
+            getMoviesMethod={getCurrentlyPlayingMovies}
+          />
+          <CarouselContainer
+            title="Upcoming"
+            getMoviesMethod={getUpcomingMovies}
+          />
         </ScrollView>
       </View>
     </Screen>
